@@ -1,11 +1,11 @@
 package Ahmed.becode;
 
-public class beverage {
+public class Beverage {
     private String color;
     private double price;
     private String temperature;
 
-    public beverage() {
+    public Beverage() {
         this.temperature = "cold";
     }
 
@@ -38,10 +38,11 @@ public class beverage {
     }
 
     public static void main(String[] args) {
-        beverage cola = new beverage();
+        Beverage cola = new Beverage();
 
         cola.setColor("Black");
         cola.setPrice(2.0);
+
 
 
         System.out.println(cola.getInfo());
