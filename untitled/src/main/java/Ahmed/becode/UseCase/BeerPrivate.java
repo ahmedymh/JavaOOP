@@ -1,6 +1,6 @@
-package Ahmed.becode;
+package Ahmed.becode.UseCase;
 
-public class BeerPrivate extends Beverage{
+public class BeerPrivate extends Beverage {
     private String name;
     private double alcoholPercentage;
 

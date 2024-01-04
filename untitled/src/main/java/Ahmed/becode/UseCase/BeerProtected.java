@@ -1,4 +1,4 @@
-package Ahmed.becode;
+package Ahmed.becode.UseCase;
 
 public class BeerProtected extends Beverage {
     protected String name;
