@@ -1,8 +1,9 @@
 package Ahmed.becode.UseCase2;
+
 import java.util.List;
 import java.util.ArrayList;
 
-public class Basket {
+public class BasketWithDiscount {
     public static void main(String[] args) {
         // Items in the basket
         List<BasketItem> basket = new ArrayList<>();
@@ -10,19 +11,25 @@ public class Basket {
         basket.add(new BasketItem("Apple", 3, 1.5));
         basket.add(new BasketItem("Bottle of wine", 2, 10));
 
+        // Apply 50% discount to every fruit
+        double discountRate = 0.5;
+        basket.stream()
+                .filter(item -> !item.getName().toLowerCase().contains("wine"))
+                .forEach(item -> item.applyDiscount(discountRate));
+
         // Calculate total price
-        double totalPriceWithClasses = basket.stream()
+        double totalPriceWithDiscount = basket.stream()
                 .mapToDouble(BasketItem::getTotal)
                 .sum();
 
         // Calculate total tax
-        double totalTaxWithClasses = basket.stream()
+        double totalTaxWithDiscount = basket.stream()
                 .mapToDouble(BasketItem::getTax)
                 .sum();
 
         // Output results
-        System.out.println("Total Price (with classes): " + String.format("%.2f", totalPriceWithClasses));
-        System.out.println("Total Tax (with classes): " + String.format("%.2f", totalTaxWithClasses));
+        System.out.println("Total Price (with discount): " + String.format("%.2f", totalPriceWithDiscount));
+        System.out.println("Total Tax (with discount): " + String.format("%.2f", totalTaxWithDiscount));
     }
 
     static class BasketItem {
@@ -36,6 +43,18 @@ public class Basket {
             this.price = price;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
         public double getTotal() {
             return quantity * price;
         }
@@ -43,6 +62,12 @@ public class Basket {
         public double getTax() {
             double taxRate = name.toLowerCase().contains("wine") ? 0.21 : 0.06;
             return getTotal() * taxRate;
+        }
+
+        public void applyDiscount(double discountRate) {
+            if (!name.toLowerCase().contains("wine")) {
+                price *= (1 - discountRate);
+            }
         }
     }
 }
